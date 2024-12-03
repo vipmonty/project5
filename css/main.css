@@ -1,0 +1,141 @@
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+/* Container Layout */
+.container {
+    display: grid;
+    grid-template-columns: 200px 1fr; /* Left menu with 200px width */
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    grid-template-areas: 
+        "nav header"
+        "nav main"
+        "nav footer";
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Navigation Styles */
+nav {
+    grid-area: nav;
+    background-color: #333;
+    padding: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column; /* Vertical menu */
+    gap: 20px;
+}
+
+nav ul.menu {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul.menu li {
+    margin: 10px 0;
+}
+
+nav ul.menu li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    background-color: #444;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: block;
+    text-align: center;
+}
+
+nav ul.menu li a:hover {
+    background-color: #555;
+}
+
+/* Theme Toggle Button */
+#toggle-theme {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #555;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#toggle-theme:hover {
+    background-color: #666;
+}
+
+/* Header Styles */
+header {
+    grid-area: header;
+    background-image: url('images/IMG_8772.JPG');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+header .logo {
+    width: 100px;
+    height: auto;
+    margin-right: 10px;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Main Content Styles */
+main {
+    grid-area: main;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer Styles */
+footer {
+    grid-area: footer;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "nav"
+            "main"
+            "footer";
+    }
+
+    nav {
+        flex-direction: row; /* Horizontal menu for smaller screens */
+        justify-content: space-around;
+    }
+
+    nav ul.menu li {
+        margin: 0;
+    }
+}

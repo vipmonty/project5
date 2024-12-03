@@ -1,0 +1,117 @@
+/* theme.css
+ * Dark theme for VIP Photography site.
+ * Adjustments for menu links to ensure functionality in dark mode.
+ */
+
+/* General Styles */
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Container Layout */
+.container {
+    grid-template-columns: 200px 1fr; /* Left menu with 200px width */
+    grid-template-areas: 
+        "nav header"
+        "nav main"
+        "nav footer";
+    gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(to right, #333, #444);
+    text-align: center;
+    padding: 30px;
+    height: auto;
+    color: #ffffff;
+}
+
+header .logo {
+    width: 80px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+/* Dark Theme for Navigation */
+nav {
+    grid-area: nav;
+    background-color: #262626;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Vertical menu */
+    gap: 20px;
+}
+
+nav ul.menu {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul.menu li {
+    margin: 10px 0;
+}
+
+nav ul.menu li a {
+    color: #e0e0e0;
+    background-color: transparent;
+    padding: 10px;
+    border-radius: 5px;
+    transition: color 0.3s, background-color 0.3s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+
+nav ul.menu li a:hover {
+    color: #ffffff;
+    background-color: #555;
+}
+
+#toggle-theme {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #444;
+    color: #e0e0e0;
+    border: 1px solid #666;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+}
+
+#toggle-theme:hover {
+    background-color: #555;
+    color: #ffffff;
+}
+
+/* Main Content Dark Theme */
+main {
+    background-color: #2a2a2a;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Footer Dark Theme */
+footer {
+    background-color: #262626;
+    color: #e0e0e0;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Mobile View Overrides */
+@media (max-width: 768px) {
+    nav ul.menu {
+        flex-direction: row; /* Horizontal menu for mobile */
+        justify-content: center;
+    }
+}

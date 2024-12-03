@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<!--   
+NOTE:  This template has been provided as an example you can look at and use for this project.  Resist the urge to just copy and paste this code.  I would like you to write every line of code yourself in your own project and understand what you are writing!
+Make the form I provided, which is ugly by design, look much better!
+
+Project:  Project 5-PERSONAL WEB SITE-VISITOR FORM VALIDATION REFACTOR JS
+Name: Viphakone
+Submitted: 12/03/2024
+ 
+Refrector:
+
+This project uses a well-organized file structure to separate content (HTML), styling (CSS), and behavior (JavaScript). 
+Each file serves a specific purpose:
+- index.html defines the structure and content.
+- main.css and theme.css handle the visual presentation in light and dark themes.
+- main.js coordinates the initialization of various functionalities.
+- page.js focuses on navigation and theme toggling logic.
+- validate.js acts as a modular validation library for the visitor form.
+
+This separation of concerns ensures that the project is scalable, maintainable, and easy to debug.
+
+I declare that the following source code was written by me, or provided
+by the instructor for this project. I understand that copying source
+code from any other source, providing source code to another student, 
+or leaving my code on a public web site constitutes cheating.
+I acknowledge that  If I am found in violation of this policy this may result
+in a zero grade, a permanent record on file and possibly immediate failure of the class.
+
+Reflection:
+
+I really enjoyed coding and configuring this website on my own, as it was both challenging 
+and fulfilling. Designing the visitor registration form allowed me to explore CSS Flexbox 
+and Grid, which made creating a clean, responsive layout both fun and rewarding. 
+I also enjoyed implementing JavaScript for form validation, which added interactivity and 
+functionality to the site. Watching the pieces of the project come together felt incredibly 
+satisfying and gave me a sense of accomplishment as I saw the final product take shape.
+
+With that being said, I faced several challenges throughout the project. Configuring
+the validation logic was tricky at first, particularly when ensuring that custom error 
+messages displayed correctly for specific fields like state abbreviations and email addresses. 
+Debugging regex patterns and handling edge cases for validation required patience and problem-solving. 
+Additionally, organizing my JavaScript into modular files was new to me, and it initially felt 
+overwhelming to separate logic into `main.js`, `validation.js`, and `page.js`. 
+However, this approach ultimately made my code easier to maintain and understand. 
+Overall, this project pushed me to think critically and strengthened my skills in web development.
+-->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography by VIP Monty</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <img src="./images/vip_photography_logo.png" alt="VIP Photography Logo" class="logo animate-bounce">
+            <h1 class="animate-bounce">VIP Photography</h1>
+        </header>
+
+        <!-- Navigation Menu -->
+        <nav>
+            <ul class="menu">
+                <li><a href="#home" class="menu-link" data-target="home">Home</a></li>
+                <li><a href="#gallery" class="menu-link" data-target="gallery">Gallery</a></li>
+                <li><a href="#contact" class="menu-link" data-target="contact">Contact</a></li>
+                <li><a href="#visitor-form-section" class="menu-link" data-target="visitor-form-section">Log Visit</a></li>
+            </ul>
+            <button id="toggle-theme">Toggle Dark Theme</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Home Section -->
+            <section id="home">
+                <h2>Welcome to VIP Photography</h2>
+                <p>Where we capture priceless moments. We deliver quality images and video as well as music videos that capture the moments in any occasion.</p>
+                <figure>
+                    <img src="images/IMG_8661.JPG" alt="A beautiful landscape" width="auto" height="250">
+                    <figcaption>A moment at Disneyland</figcaption>
+                </figure>
+                <!-- Embed video -->
+                <video width="600" height="340" controls>
+                    <source src="OfficeWalk.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </section>
+
+            <!-- Gallery Section -->
+            <section id="gallery" style="display: none;">
+                <h2>Gallery</h2>
+                <p>Some of my Work.</p>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images/IMG_5381.jpg">
+                    <source media="(min-width: 769px)" srcset="images/IMG_5381.JPG">
+                    <img src="images/IMG_5381.JPG" alt="A moment with water fun" width="auto" height="300">
+                    <figcaption>A moment with water fun</figcaption>
+                </picture>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="images/IMG_5667.jpg">
+                    <source media="(min-width: 566px)" srcset="images/IMG_5667.JPG">
+                    <img src="images/IMG_5667.JPG" alt="Responsive Gallery" width="auto" height="300">
+                    <figcaption>Fiery Festival Fun</figcaption>
+                </picture>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" style="display: none;">
+                <h2>Contact Information</h2>
+                <p>Feel free to reach out to me via the following platforms:</p>
+                <ul>
+                    <li>Email: vip_photography@email.com</li>
+                    <li><a href="https://instagram.com">Instagram</a></li>
+                    <li><a href="https://facebook.com">Facebook</a></li>
+                </ul>
+            </section>
+
+            <!-- Visitor Form Section -->
+            <section id="visitor-form-section" style="display: none;">
+                <h2>Visitor Registration Form</h2>
+                <form id="visitor-form" novalidate>
+                    <!-- Personal Information Section -->
+                    <fieldset>
+                        <legend>Personal Information</legend>
+                        <div class="form-group">
+                            <label for="first-name">First Name:</label>
+                            <input type="text" id="first-name" required>
+                            <div class="errorMsg"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="last-name">Last Name:</label>
+                            <input type="text" id="last-name" required>
+                            <div class="errorMsg"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Address:</label>
+                            <input type="text" id="address" required>
+                            <div class="errorMsg"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City:</label>
+                            <input type="text" id="city" required>
+                            <div class="errorMsg"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="state">State:</label>
+                            <input type="text" id="state" maxlength="2" required>
+                            <div class="errorMsg"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="zip">Zip Code:</label>
+                            <input type="text" id="zip" required>
+                            <div class="errorMsg"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Cell Phone:</label>
+                            <input type="text" id="phone" required>
+                            <div class="errorMsg"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" required>
+                            <div class="errorMsg"></div>
+                        </div>
+                    </fieldset>
+
+                    <!-- How Did You Find Us Section -->
+                    <fieldset>
+                        <legend>How did you find my page?</legend>
+                        <div class="form-group">
+                            <label><input type="checkbox" name="source" value="Internet"> Internet</label>
+                            <label><input type="checkbox" name="source" value="Friend"> Friend</label>
+                            <label><input type="checkbox" name="source" value="Google"> Google</label>
+                            <div class="errorMsg"></div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Comments Section -->
+                    <fieldset>
+                        <legend>Comments (Optional)</legend>
+                        <textarea id="comments" rows="4" cols="50"></textarea>
+                    </fieldset>
+
+                    <!-- Submit Button -->
+                    <button id="submitBtn" type="submit">Submit</button>
+                </form>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2024 VIP Photography</p>
+        </footer>
+    </div>
+
+    <script src="js/validate.js" defer></script>
+    <script src="js/page.js" defer></script>
+    <script src="js/main.js" defer></script>
+</body>
+</html>
